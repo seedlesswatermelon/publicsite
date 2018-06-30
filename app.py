@@ -8,8 +8,16 @@ import pandas as pd
 from flask import Flask
 from flask import render_template, send_file
 from flask import request
+import os
+from flask import send_from_directory
+
 
 app = Flask(__name__)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'img'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/')
