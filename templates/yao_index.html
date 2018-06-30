@@ -1,0 +1,87 @@
+{% extends "layouts/personel_layout.html" %}
+
+{% block title %}
+月度汇报整理
+{% endblock %}
+
+{% block header_wording %}
+月度汇报整理
+{% endblock %}
+
+{% block sub_header_wording %}
+谨以此工具献给我们美貌与智慧（划掉）并重的摇同学
+{% endblock %}
+
+{% block content_data %}
+<div class="section">
+
+    <div class="row">
+        <div class="col s12 m4">
+            <div class="icon-block">
+                <h2 class="center light-blue-text">
+                    <i class="material-icons">settings</i>
+                </h2>
+                <h5 class="center">使用说明</h5>
+
+                <p class="light">1. 点击 Upload 按钮，上传原始的月度数据excel文件</p>
+                <p class="light">2. 点击 Do It. 按钮提交到服务器处理</p>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="icon-block">
+                <h2 class="center light-blue-text">
+                    <i class="material-icons">add_circle</i>
+                </h2>
+                <h5 class="center">上传文件</h5>
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn waves-effect waves-light orange">
+                            <span>Upload</span>
+                            <input id="files_upload" type="file" multiple>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="选择一个或多个文件">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="icon-block">
+                <h2 class="center light-blue-text">
+                    <i class="material-icons">arrow_upward</i>
+                </h2>
+                <h5 class="center">提交请求</h5>
+                <br>
+                <div class="center">
+                    <button class="btn waves-effect waves-light orange" type="submit" name="action" id="commit_upload_files">Do It.
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="loading" class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="/static/js/yao_index.js"></script>
+{% endblock %}

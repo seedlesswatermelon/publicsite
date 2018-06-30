@@ -1,0 +1,38 @@
+{% extends "layouts/personel_layout.html" %}
+
+{% block title %}
+月度汇报整理
+{% endblock %}
+
+{% block header_wording %}
+月度汇报整理
+{% endblock %}
+
+{% block sub_header_wording %}
+谨以此工具献给我们美貌与智慧（划掉）并重的摇同学
+{% endblock %}
+
+{% block content_data %}
+
+<div class="section">
+    <h2 class="header center orange-text">上报省公司.xls</h2>
+    {{ report_excel_data|safe }}
+</div>
+
+<div class="section">
+    <h2 class="header center orange-text">内部发文.doc</h2>
+    <h3 class="header center orange-text">设计</h3>
+    {{ report_doc_data1|safe }}
+    <h3 class="header center orange-text">监理</h3>
+    {{ report_doc_data2|safe }}
+    <h3 class="header center orange-text">施工</h3>
+    {{ report_doc_data3|safe }}
+</div>
+
+{% if error_msg %}
+    <div class="section">
+        <h2 class="header center orange-text">数据异常信息</h2>
+        {{ error_msg|safe }}
+    </div>
+{% endif %}
+{% endblock %}

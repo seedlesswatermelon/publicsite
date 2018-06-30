@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return send_file("static/index.html")
+    return render_template("yao_index.html")
 
 
 @app.route("/upload", methods=["POST"])
@@ -51,7 +51,7 @@ def upload():
 
     error_msg = error_msg.getvalue().replace(";", "<br>")
 
-    return render_template("index.html",
+    return render_template("yao_result.html",
                            report_excel_data=report_excel_data_html.getvalue().replace("\\n", "<br>"),
                            report_doc_data1=report_doc_data_1_html.getvalue().replace("\\n", "<br>"),
                            report_doc_data2=report_doc_data_2_html.getvalue().replace("\\n", "<br>"),
