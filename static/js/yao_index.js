@@ -16,7 +16,7 @@ $(document).ready(function () {
 
         for (var i = 0; i < files.length; i++) {
             if (!files[i].name.toLowerCase().endsWith(".xls")){
-                M.toast({ html: "请仅选择上传xls文件", classes: "red" });
+                M.toast({ html: "请确认选择上传的是excel文件（后缀名.xls）", classes: "red" });
 
                 $("#loading").hide();
                 return;
