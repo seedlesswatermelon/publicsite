@@ -15,8 +15,10 @@ $(document).ready(function () {
         }
 
         for (var i = 0; i < files.length; i++) {
-            if (!files[i].name.toLowerCase().endsWith(".xls")){
-                M.toast({ html: "请确认选择上传的是excel文件（后缀名.xls）", classes: "red" });
+            if ((!files[i].name.toLowerCase().endsWith(".xls"))
+                && (!files[i].name.toLowerCase().endsWith(".xlsx"))) {
+
+                M.toast({ html: "请确认选择上传的是excel文件（后缀名是.xls或者.xlsx）", classes: "red" });
 
                 $("#loading").hide();
                 return;
