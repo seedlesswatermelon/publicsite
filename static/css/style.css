@@ -23,3 +23,9 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+#toast-container {
+top: 0%;
+left: 30%;
+right: 30%; 
+}
