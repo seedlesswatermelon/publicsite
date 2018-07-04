@@ -174,9 +174,9 @@ def gen_doc_file(df, logger, error_msg, states=("设计", "监理", "施工"), v
             if last_state is None and last_company is None:
                 pass
 
-            elif curr_state in states:
+            elif last_state in states:
                 for ind in range(len(states)):
-                    if curr_state == states[ind]:
+                    if last_state == states[ind]:
                         res_dfs[ind].loc[res_dfs[ind].shape[0]] = [0,
                                                                    last_company, cost_score_sum,
                                                                    100 - cost_score_sum,
