@@ -11,8 +11,8 @@ from flask import request
 import os
 from flask import send_from_directory
 
-
 app = Flask(__name__)
+
 
 @app.route('/favicon.ico')
 def favicon():
@@ -27,44 +27,47 @@ def index():
 
 @app.route("/upload", methods=["POST"])
 def upload():
-    files = request.files.getlist("file")
+    try:
+        files = request.files.getlist("file")
 
-    error_msg = StringIO()
+        error_msg = StringIO()
 
-    report_excel_data = init_report_excel_data()
+        report_excel_data = init_report_excel_data()
 
-    app.logger.info("遍历upload文件")
-    for file in files:
-        file_name = file.filename
-        parse_check_file(error_msg, file, file_name, report_excel_data, app.logger)
+        app.logger.info("遍历upload文件")
+        for file in files:
+            file_name = file.filename
+            parse_check_file(error_msg, file, file_name, report_excel_data, app.logger)
 
-    report_doc_data = gen_doc_file(report_excel_data, app.logger, error_msg)
+        report_doc_data = gen_doc_file(report_excel_data, app.logger, error_msg)
 
-    report_excel_data_html = StringIO()
-    report_doc_data_1_html = StringIO()
-    report_doc_data_2_html = StringIO()
-    report_doc_data_3_html = StringIO()
+        report_excel_data_html = StringIO()
+        report_doc_data_1_html = StringIO()
+        report_doc_data_2_html = StringIO()
+        report_doc_data_3_html = StringIO()
 
-    pd.set_option('display.max_colwidth', -1)
+        pd.set_option('display.max_colwidth', -1)
 
-    report_excel_data.to_html(report_excel_data_html, escape=False, index=False, index_names=False, header=True,
-                              na_rep="-")
+        report_excel_data.to_html(report_excel_data_html, escape=False, index=False, index_names=False, header=True,
+                                  na_rep="-")
 
-    report_doc_data[0].to_html(report_doc_data_1_html, escape=False, index=False, index_names=False, header=True,
-                               na_rep="-")
-    report_doc_data[1].to_html(report_doc_data_2_html, escape=False, index=False, index_names=False, header=True,
-                               na_rep="-")
-    report_doc_data[2].to_html(report_doc_data_3_html, escape=False, index=False, index_names=False, header=True,
-                               na_rep="-")
+        report_doc_data[0].to_html(report_doc_data_1_html, escape=False, index=False, index_names=False, header=True,
+                                   na_rep="-")
+        report_doc_data[1].to_html(report_doc_data_2_html, escape=False, index=False, index_names=False, header=True,
+                                   na_rep="-")
+        report_doc_data[2].to_html(report_doc_data_3_html, escape=False, index=False, index_names=False, header=True,
+                                   na_rep="-")
 
-    error_msg = error_msg.getvalue().replace(";", "<br>")
+        error_msg = error_msg.getvalue().replace(";", "<br>")
 
-    return render_template("yao_result.html",
-                           report_excel_data=report_excel_data_html.getvalue().replace("\\n", "<br>"),
-                           report_doc_data1=report_doc_data_1_html.getvalue().replace("\\n", "<br>"),
-                           report_doc_data2=report_doc_data_2_html.getvalue().replace("\\n", "<br>"),
-                           report_doc_data3=report_doc_data_3_html.getvalue().replace("\\n", "<br>"),
-                           error_msg=error_msg)
+        return render_template("yao_result.html",
+                               report_excel_data=report_excel_data_html.getvalue().replace("\\n", "<br>"),
+                               report_doc_data1=report_doc_data_1_html.getvalue().replace("\\n", "<br>"),
+                               report_doc_data2=report_doc_data_2_html.getvalue().replace("\\n", "<br>"),
+                               report_doc_data3=report_doc_data_3_html.getvalue().replace("\\n", "<br>"),
+                               error_msg=error_msg)
+    except Exception as e:
+        return e.args
 
     # resp = Response({"code": 200})
     # resp.headers['Access-Control-Allow-Origin'] = '*'
