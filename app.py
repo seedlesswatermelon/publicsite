@@ -67,7 +67,7 @@ def upload():
                                report_doc_data3=report_doc_data_3_html.getvalue().replace("\\n", "<br>"),
                                error_msg=error_msg)
     except Exception as e:
-        return e.args
+        return str(e.args)
 
     # resp = Response({"code": 200})
     # resp.headers['Access-Control-Allow-Origin'] = '*'
